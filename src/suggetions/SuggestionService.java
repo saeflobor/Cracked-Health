@@ -1,3 +1,5 @@
+package suggetions;
+
 public class SuggestionService {
 
     public String generateSuggestions(String healthStatus) {

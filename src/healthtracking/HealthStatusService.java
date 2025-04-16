@@ -1,3 +1,7 @@
+package healthtracking;
+
+import suggetions.ISuggestionService;
+
 import java.util.Scanner;
 
 public class HealthStatusService {

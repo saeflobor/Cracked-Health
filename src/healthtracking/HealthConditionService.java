@@ -1,3 +1,5 @@
+package healthtracking;
+
 public class HealthConditionService {
 
     public String evaluateCondition(HealthCondition condition) {

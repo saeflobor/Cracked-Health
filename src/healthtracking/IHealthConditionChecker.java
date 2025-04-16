@@ -1,3 +1,5 @@
+package healthtracking;
+
 import java.util.Scanner;
 
 public interface IHealthConditionChecker {

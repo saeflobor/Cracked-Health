@@ -1,10 +1,12 @@
+package healthtracking;
+
 import java.util.Scanner;
 
 public class HealthConditionChecker {
 
     private static final String PURPLE = "\033[35m";
     private static final String RESET = "\033[0m";
-    DailyHealthTracker dailyHealthTracker;
+    public DailyHealthTracker dailyHealthTracker;
 
     public HealthConditionChecker() {
         this.dailyHealthTracker = new DailyHealthTracker();

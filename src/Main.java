@@ -1,3 +1,11 @@
+import doctor.DoctorRecommendationService;
+import healthtracking.HealthConditionChecker;
+import liquidtracking.LiquidTrackerService;
+import medication.MedicineTrackerService;
+import routine.RoutineService;
+import suggetions.SuggestionService;
+import utils.TerminalUtils;
+
 import java.util.Scanner;
 
 public class Main {
@@ -21,13 +29,13 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline character
 
-            // Create an instance of SuggestionService
+            // Create an instance of suggetions.SuggestionService
             SuggestionService suggestionService = new SuggestionService();
 
-            // Create an instance of DoctorRecommendationService
+            // Create an instance of doctor.DoctorRecommendationService
             DoctorRecommendationService doctorRecommendationService = new DoctorRecommendationService();
 
-            // Create an instance of RoutineService
+            // Create an instance of routine.RoutineService
             RoutineService routineService = new RoutineService();
 
 
@@ -96,7 +104,7 @@ public class Main {
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
-//            TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+//            utils.TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
         }
 
         scanner.close();  // Close the scanner object to avoid resource leaks

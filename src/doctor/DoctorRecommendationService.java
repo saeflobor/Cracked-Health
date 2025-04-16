@@ -1,3 +1,5 @@
+package doctor;
+
 import java.util.Scanner;
 
 public class DoctorRecommendationService {

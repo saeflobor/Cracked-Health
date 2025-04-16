@@ -1,3 +1,5 @@
+package medication;
+
 import java.util.Scanner;
 
 public class MedLiquidTrackerService {
