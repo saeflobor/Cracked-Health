@@ -11,12 +11,18 @@ public class MedicineTrackerService {
     private int morningDoses;
     private int noonDoses;
     private int nightDoses;
+    private int morningDosesTaken;
+    private int noonDosesTaken;
+    private int nightDosesTaken;
 
     public MedicineTrackerService() {
         this.medicationName = "";
         this.morningDoses = 0;
         this.noonDoses = 0;
         this.nightDoses = 0;
+        this.morningDosesTaken = 0;
+        this.noonDosesTaken = 0;
+        this.nightDosesTaken = 0;
     }
 
     // Set medication and doses
@@ -40,116 +46,67 @@ public class MedicineTrackerService {
         saveMedicationToCSV();
     }
 
-    // Update medication doses
+    // Track daily medicine consumption
+    public void trackDailyMedicineConsumption(Scanner scanner) {
+        System.out.println("\nTrack your daily medicine consumption for " + medicationName);
 
-    public void updateDoses(Scanner scanner) {
-        // Step 1: Read existing medication records
-        List<String[]> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("medication_records.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] record = line.split(", ");
-                records.add(record);
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading from CSV file: " + e.getMessage());
-            return;
-        }
+        System.out.print("How many morning doses have you taken? ");
+        morningDosesTaken = scanner.nextInt();
 
-        // Step 2: Show all available medication names
-        System.out.println("\nAvailable Medications:");
-        int index = 1;
-        for (String[] record : records) {
-            if (record.length >= 1) {
-                String medicationName = record[0];
-                System.out.println(index++ + ". " + medicationName);
-            }
-        }
+        System.out.print("How many noon doses have you taken? ");
+        noonDosesTaken = scanner.nextInt();
 
-        // Step 3: Ask the user to select a medication to update
-        System.out.print("\nEnter the number of the medication to update: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();  // Consume the newline character
+        System.out.print("How many night doses have you taken? ");
+        nightDosesTaken = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
 
-        if (choice < 1 || choice >= index) {
-            System.out.println("Invalid choice. Please select a valid medication number.");
-            return;
-        }
+        // Update CSV with daily consumption data
+        saveDailyConsumptionToCSV();
+    }
 
-        // Retrieve the selected medication's record
-        String[] selectedRecord = records.get(choice - 1);
-        String medicationName = selectedRecord[0];
-
-        // Step 4: Ask for new doses
-        System.out.println("Updating medication doses for: " + medicationName);
-
-        System.out.print("Enter the number of morning doses: ");
-        int morningDoses = scanner.nextInt();
-
-        System.out.print("Enter the number of noon doses: ");
-        int noonDoses = scanner.nextInt();
-
-        System.out.print("Enter the number of night doses: ");
-        int nightDoses = scanner.nextInt();
-        scanner.nextLine();  // Consume the newline character
-
-        // Update the record with new doses
-        selectedRecord[1] = String.valueOf(morningDoses);
-        selectedRecord[2] = String.valueOf(noonDoses);
-        selectedRecord[3] = String.valueOf(nightDoses);
-
-        // Step 5: Write the updated records back to the CSV file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("medication_records.csv"))) {
-            for (String[] record : records) {
-                writer.write(String.join(", ", record));
-                writer.newLine();
-            }
-            System.out.println("Medication doses updated successfully!");
+    // Save daily consumption data to CSV file
+    private void saveDailyConsumptionToCSV() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("medication_consumption.csv", true))) {
+            writer.append(medicationName + ", " + morningDosesTaken + ", " + noonDosesTaken + ", " + nightDosesTaken + "\n");
+            System.out.println("Daily consumption data saved!");
         } catch (IOException e) {
             System.out.println("Error writing to CSV file: " + e.getMessage());
         }
     }
 
-
-    // Display medication tracker
-
-    public void displayMedicationTracker() {
-        try (BufferedReader br = new BufferedReader(new FileReader("medication_records.csv"))) {
+    // Display daily consumption summary
+    public void displayDailyConsumptionSummary() {
+        try (BufferedReader br = new BufferedReader(new FileReader("medication_consumption.csv"))) {
             String line;
             boolean hasRecords = false;
 
-            System.out.println("\nMedication Tracker:");
-            System.out.println("+----------------------------+-----------------+");
-            System.out.println("| Medication                | Doses Remaining |");
-            System.out.println("+----------------------------+-----------------+");
+            System.out.println("\nDaily Medicine Consumption Summary:");
+            System.out.println("+----------------------------+------------------+------------------+------------------+");
+            System.out.println("| Medication                | Morning Doses    | Noon Doses       | Night Doses      |");
+            System.out.println("+----------------------------+------------------+------------------+------------------+");
 
-            // Read through the file and print each medication and its doses
             while ((line = br.readLine()) != null) {
                 hasRecords = true;
                 String[] record = line.split(", ");
                 if (record.length == 4) {
                     String medication = record[0];
-                    int morningDoses = Integer.parseInt(record[1]);
-                    int noonDoses = Integer.parseInt(record[2]);
-                    int nightDoses = Integer.parseInt(record[3]);
+                    int morning = Integer.parseInt(record[1]);
+                    int noon = Integer.parseInt(record[2]);
+                    int night = Integer.parseInt(record[3]);
 
-                    // Display the medication and remaining doses
-                    System.out.println(String.format("| %-26s| %-15d |", medication + " (Morning)", morningDoses));
-                    System.out.println(String.format("| %-26s| %-15d |", medication + " (Noon)", noonDoses));
-                    System.out.println(String.format("| %-26s| %-15d |", medication + " (Night)", nightDoses));
+                    System.out.println(String.format("| %-26s| %-16d| %-16d| %-16d|", medication, morning, noon, night));
                 }
             }
 
             if (!hasRecords) {
-                System.out.println("| No medication records available. |");
+                System.out.println("| No consumption records available. |");
             }
 
-            System.out.println("+----------------------------+-----------------+");
+            System.out.println("+----------------------------+------------------+------------------+------------------+");
         } catch (IOException e) {
             System.out.println("Error reading from CSV file: " + e.getMessage());
         }
     }
-
 
     // Save medication details to CSV file
     private void saveMedicationToCSV() {
@@ -159,4 +116,56 @@ public class MedicineTrackerService {
             System.out.println("Error writing to CSV file: " + e.getMessage());
         }
     }
+    public void updateDoses(Scanner scanner) {
+        // Ask user to update morning, noon, and night doses
+        System.out.print("Enter the new number of morning doses for " + medicationName + ": ");
+        morningDoses = scanner.nextInt();
+
+        System.out.print("Enter the new number of noon doses for " + medicationName + ": ");
+        noonDoses = scanner.nextInt();
+
+        System.out.print("Enter the new number of night doses for " + medicationName + ": ");
+        nightDoses = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character after integer input
+
+        // Save updated doses to the CSV file
+        saveMedicationToCSV();
+
+        System.out.println("Medication doses updated successfully!");
+    }
+
+    public void displayMedicationTracker() {
+        try (BufferedReader br = new BufferedReader(new FileReader("medication_records.csv"))) {
+            String line;
+            boolean hasRecords = false;
+
+            System.out.println("\nMedication Tracker:");
+            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+            System.out.println("| Medication                | Morning Doses   | Noon Doses      | Night Doses     |");
+            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+
+            while ((line = br.readLine()) != null) {
+                hasRecords = true;
+                String[] record = line.split(", ");
+                if (record.length == 4) {
+                    String medication = record[0];
+                    int morning = Integer.parseInt(record[1]);
+                    int noon = Integer.parseInt(record[2]);
+                    int night = Integer.parseInt(record[3]);
+
+                    System.out.println(String.format("| %-26s| %-16d| %-16d| %-16d|", medication, morning, noon, night));
+                }
+            }
+
+            if (!hasRecords) {
+                System.out.println("| No medication records available. |");
+            }
+
+            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+        } catch (IOException e) {
+            System.out.println("Error reading from CSV file: " + e.getMessage());
+        }
+    }
+
+
 }

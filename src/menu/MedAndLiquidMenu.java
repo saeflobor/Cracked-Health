@@ -29,6 +29,8 @@ public class MedAndLiquidMenu {
             System.out.println("4. Set Daily Water Goal");
             System.out.println("5. Track Water Consumption");
             System.out.println("6. View Water Consumption Status");
+            System.out.println("7. Track Daily Medicine Consumption");
+            System.out.println("8. View Daily Medicine Consumption Summary");
             System.out.println("0. Back to Main Menu");
 
             System.out.print("Please choose an option: ");
@@ -54,6 +56,12 @@ public class MedAndLiquidMenu {
                 case 6:
                     liquidTracker.displayWaterConsumptionStatus();  // Display water status
                     break;
+                case 7:
+                    medicineTracker.trackDailyMedicineConsumption(scanner);  // Track daily medicine consumption
+                    break;
+                case 8:
+                    medicineTracker.displayDailyConsumptionSummary();  // View daily medicine consumption summary
+                    break;
                 case 0:
                     submenuRunning = false;  // Go back to the main menu
                     break;
@@ -62,4 +70,6 @@ public class MedAndLiquidMenu {
             }
         }
     }
+
+
 }
