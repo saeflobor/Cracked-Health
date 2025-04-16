@@ -48,8 +48,12 @@ public class MedicineTrackerService {
 
     // Track daily medicine consumption
     public void trackDailyMedicineConsumption(Scanner scanner) {
+        // Read current medication details from CSV
+        displayMedicationTracker();
+
         System.out.println("\nTrack your daily medicine consumption for " + medicationName);
 
+        // Prompt user for how many doses have been taken
         System.out.print("How many morning doses have you taken? ");
         morningDosesTaken = scanner.nextInt();
 
@@ -60,17 +64,51 @@ public class MedicineTrackerService {
         nightDosesTaken = scanner.nextInt();
         scanner.nextLine();  // Consume newline
 
-        // Update CSV with daily consumption data
+        // Update the CSV file with the new doses taken
         saveDailyConsumptionToCSV();
+
+        System.out.println("Daily consumption data updated!");
     }
 
-    // Save daily consumption data to CSV file
     private void saveDailyConsumptionToCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("medication_consumption.csv", true))) {
             writer.append(medicationName + ", " + morningDosesTaken + ", " + noonDosesTaken + ", " + nightDosesTaken + "\n");
-            System.out.println("Daily consumption data saved!");
         } catch (IOException e) {
             System.out.println("Error writing to CSV file: " + e.getMessage());
+        }
+    }
+
+    public void displayMedicationTracker() {
+        try (BufferedReader br = new BufferedReader(new FileReader("medication_records.csv"))) {
+            String line;
+            boolean hasRecords = false;
+
+            System.out.println("\nMedication Tracker:");
+            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+            System.out.println("| Medication                | Morning Doses   | Noon Doses      | Night Doses     |");
+            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+
+            // Read the file and display the medication tracker
+            while ((line = br.readLine()) != null) {
+                hasRecords = true;
+                String[] record = line.split(", ");
+                if (record.length == 4) {
+                    String medication = record[0];
+                    int morning = Integer.parseInt(record[1]);
+                    int noon = Integer.parseInt(record[2]);
+                    int night = Integer.parseInt(record[3]);
+
+                    System.out.println(String.format("| %-26s| %-16d| %-16d| %-16d|", medication, morning, noon, night));
+                }
+            }
+
+            if (!hasRecords) {
+                System.out.println("| No medication records available. |");
+            }
+
+            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+        } catch (IOException e) {
+            System.out.println("Error reading from CSV file: " + e.getMessage());
         }
     }
 
@@ -133,39 +171,4 @@ public class MedicineTrackerService {
 
         System.out.println("Medication doses updated successfully!");
     }
-
-    public void displayMedicationTracker() {
-        try (BufferedReader br = new BufferedReader(new FileReader("medication_records.csv"))) {
-            String line;
-            boolean hasRecords = false;
-
-            System.out.println("\nMedication Tracker:");
-            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
-            System.out.println("| Medication                | Morning Doses   | Noon Doses      | Night Doses     |");
-            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
-
-            while ((line = br.readLine()) != null) {
-                hasRecords = true;
-                String[] record = line.split(", ");
-                if (record.length == 4) {
-                    String medication = record[0];
-                    int morning = Integer.parseInt(record[1]);
-                    int noon = Integer.parseInt(record[2]);
-                    int night = Integer.parseInt(record[3]);
-
-                    System.out.println(String.format("| %-26s| %-16d| %-16d| %-16d|", medication, morning, noon, night));
-                }
-            }
-
-            if (!hasRecords) {
-                System.out.println("| No medication records available. |");
-            }
-
-            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
-        } catch (IOException e) {
-            System.out.println("Error reading from CSV file: " + e.getMessage());
-        }
-    }
-
-
 }
