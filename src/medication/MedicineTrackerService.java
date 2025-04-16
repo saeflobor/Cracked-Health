@@ -56,52 +56,57 @@ public class MedicineTrackerService {
             return;
         }
 
-        // Step 2: Ask user for the medication to update
-        System.out.println("\nEnter the medication name to update:");
-        String medicationName = scanner.nextLine();
-
-        boolean found = false;
-        for (int i = 0; i < records.size(); i++) {
-            String[] record = records.get(i);
-            if (record[0].equals(medicationName)) {
-                // Medication found, update the doses
-                System.out.println("Updating medication doses for: " + medicationName);
-
-                System.out.print("Enter the number of morning doses: ");
-                int morningDoses = scanner.nextInt();
-
-                System.out.print("Enter the number of noon doses: ");
-                int noonDoses = scanner.nextInt();
-
-                System.out.print("Enter the number of night doses: ");
-                int nightDoses = scanner.nextInt();
-                scanner.nextLine();  // Consume the newline character
-
-                // Update the record with new doses
-                record[1] = String.valueOf(morningDoses);
-                record[2] = String.valueOf(noonDoses);
-                record[3] = String.valueOf(nightDoses);
-
-                // Update the list of records
-                records.set(i, record);
-                found = true;
-                break;
+        // Step 2: Show all available medication names
+        System.out.println("\nAvailable Medications:");
+        int index = 1;
+        for (String[] record : records) {
+            if (record.length >= 1) {
+                String medicationName = record[0];
+                System.out.println(index++ + ". " + medicationName);
             }
         }
 
-        if (found) {
-            // Step 3: Write the updated records back to the CSV file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("medication_records.csv"))) {
-                for (String[] record : records) {
-                    writer.write(String.join(", ", record));
-                    writer.newLine();
-                }
-                System.out.println("Medication doses updated successfully!");
-            } catch (IOException e) {
-                System.out.println("Error writing to CSV file: " + e.getMessage());
+        // Step 3: Ask the user to select a medication to update
+        System.out.print("\nEnter the number of the medication to update: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+
+        if (choice < 1 || choice >= index) {
+            System.out.println("Invalid choice. Please select a valid medication number.");
+            return;
+        }
+
+        // Retrieve the selected medication's record
+        String[] selectedRecord = records.get(choice - 1);
+        String medicationName = selectedRecord[0];
+
+        // Step 4: Ask for new doses
+        System.out.println("Updating medication doses for: " + medicationName);
+
+        System.out.print("Enter the number of morning doses: ");
+        int morningDoses = scanner.nextInt();
+
+        System.out.print("Enter the number of noon doses: ");
+        int noonDoses = scanner.nextInt();
+
+        System.out.print("Enter the number of night doses: ");
+        int nightDoses = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+
+        // Update the record with new doses
+        selectedRecord[1] = String.valueOf(morningDoses);
+        selectedRecord[2] = String.valueOf(noonDoses);
+        selectedRecord[3] = String.valueOf(nightDoses);
+
+        // Step 5: Write the updated records back to the CSV file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("medication_records.csv"))) {
+            for (String[] record : records) {
+                writer.write(String.join(", ", record));
+                writer.newLine();
             }
-        } else {
-            System.out.println("Medication not found. Please check the name and try again.");
+            System.out.println("Medication doses updated successfully!");
+        } catch (IOException e) {
+            System.out.println("Error writing to CSV file: " + e.getMessage());
         }
     }
 
