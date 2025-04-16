@@ -34,6 +34,7 @@ public class Main {
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
+//            TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
         }
 
         scanner.close();  // Close the scanner object to avoid resource leaks
@@ -51,6 +52,7 @@ public class Main {
     private static void healthConditionCheckerMenu(Scanner scanner, HealthConditionChecker healthChecker) {
         boolean submenuRunning = true;
         while (submenuRunning) {
+            TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
             System.out.println("\nHealth Condition Checker Menu:");
             System.out.println("1. Check Health Condition");
             System.out.println("2. View Daily Health Track");
@@ -80,6 +82,7 @@ public class Main {
     private static void medAndLiquidTrackerMenu(Scanner scanner, MedicineTrackerService medicineTracker, LiquidTrackerService liquidTracker) {
         boolean submenuRunning = true;
         while (submenuRunning) {
+            TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
             System.out.println("\nMed and Liquid Tracker Menu:");
             System.out.println("1. Set Medication Details");
             System.out.println("2. Update Medication Doses");

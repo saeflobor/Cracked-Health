@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -38,19 +40,28 @@ public class DailyHealthTracker {
 
     // Show the daily health track (history of recorded health statuses)
     public void showDailyTrack() {
-        if (dailyHealthRecords.isEmpty()) {
-            System.out.println("No health records available.");
-            return;
-        }
+        try (BufferedReader br = new BufferedReader(new FileReader("health_records.csv"))) {
+            String line;
+            boolean hasRecords = false;
 
-        System.out.println("\n" + "\033[32m" + "Your Daily Health Track:" + "\033[0m");
-        System.out.println("+---------------------------+");
-        System.out.println("| Date and Time             | Health Status           |");
-        System.out.println("+---------------------------+");
+            System.out.println("\nYour Daily Health Track:");
+            System.out.println("+---------------------------+");
+            System.out.println("| Date and Time             | Health Status           |");
+            System.out.println("+---------------------------+");
 
-        for (String record : dailyHealthRecords) {
-            System.out.println("| " + record + " |");
+            // Read through the file and print each line
+            while ((line = br.readLine()) != null) {
+                hasRecords = true;
+                System.out.println("| " + line + " |");
+            }
+
+            if (!hasRecords) {
+                System.out.println("| No health records available. |");
+            }
+
+            System.out.println("+---------------------------+");
+        } catch (IOException e) {
+            System.out.println("Error reading from CSV file: " + e.getMessage());
         }
-        System.out.println("+---------------------------+");
     }
 }
