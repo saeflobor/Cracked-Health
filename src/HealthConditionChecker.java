@@ -2,9 +2,13 @@ import java.util.Scanner;
 
 public class HealthConditionChecker {
 
-    // Purple color code for questions
     private static final String PURPLE = "\033[35m";
-    private static final String RESET = "\033[0m";  // Reset color code
+    private static final String RESET = "\033[0m";
+    DailyHealthTracker dailyHealthTracker;
+
+    public HealthConditionChecker() {
+        this.dailyHealthTracker = new DailyHealthTracker();
+    }
 
     public String checkHealthCondition(Scanner scanner) {
         // Ask the user questions and capture their answers
@@ -15,7 +19,7 @@ public class HealthConditionChecker {
         System.out.println("4. More than 5 hours");
         System.out.print("Please choose an option: ");
         int sleepOption = scanner.nextInt();
-        System.out.println();  // Add a gap after the question
+        System.out.println();
 
         System.out.println(PURPLE + "How many meals do you take in a day?" + RESET);
         System.out.println("1. 1 meal");
@@ -23,46 +27,47 @@ public class HealthConditionChecker {
         System.out.println("3. 3 meals");
         System.out.print("Please choose an option: ");
         int mealsOption = scanner.nextInt();
-        System.out.println();  // Add a gap after the question
+        System.out.println();
 
-        // Change Yes/No to number options for better visibility
         System.out.println(PURPLE + "Do you feel Dizzy?" + RESET);
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.print("Please choose an option: ");
         boolean dizzy = scanner.nextInt() == 1;
-        System.out.println();  // Add a gap after the question
+        System.out.println();
 
-        // Change Yes/No to number options for better visibility
         System.out.println(PURPLE + "Does your tummy hurt and you vomited?" + RESET);
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.print("Please choose an option: ");
         boolean tummyPain = scanner.nextInt() == 1;
-        System.out.println();  // Add a gap after the question
+        System.out.println();
 
-        // Change Yes/No to number options for better visibility
         System.out.println(PURPLE + "Do you have chest and body pain?" + RESET);
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.print("Please choose an option: ");
         boolean chestPain = scanner.nextInt() == 1;
-        System.out.println();  // Add a gap after the question
+        System.out.println();
 
-        // Evaluate health condition based on responses
+        // Evaluate health status based on responses
         String healthStatus = evaluateHealthStatus(sleepOption, mealsOption, dizzy, tummyPain, chestPain);
 
-        // Display health status in red
+        // Display health status
         System.out.println("\n\033[31mHealth Status: " + healthStatus + "\033[0m");
 
-        // Prompt the user to return to the main menu
-        System.out.println("\nPress 0 to go back to the main menu.");
+        // Record the health status for tracking
+        dailyHealthTracker.recordHealthStatus(healthStatus);
 
-        // Wait for user input to return to the main menu
+        // Prompt the user to return to the main menu
+        System.out.println("\nPress 0 to go back to the main menu or 1 to view daily health track.");
         int choice = scanner.nextInt();
         if (choice == 0) {
             return healthStatus;
+        } else if (choice == 1) {
+            dailyHealthTracker.showDailyTrack(); // Show the daily health track
         }
+
         return healthStatus;
     }
 
