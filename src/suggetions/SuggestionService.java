@@ -30,13 +30,20 @@ public class SuggestionService {
         // Start chart with green border
         System.out.println("\n" + green + "Suggestions to Revive:" + reset);
         System.out.println(green + "+--------------------------------------------------+" + reset);
-        System.out.println(green + "|                   Suggestions                   |" + reset);
+        System.out.println(green + "|                   Suggestions                    |" + reset);
         System.out.println(green + "+--------------------------------------------------+" + reset);
 
         // Loop through the suggestions and display them inside the green border, with white text
         String[] suggestionList = suggestions.split("\n");
         for (String suggestion : suggestionList) {
-            System.out.println(green + "| " + white + suggestion + " " + green + "|" + reset);  // Display the suggestions in white text inside the green box
+            String suggetionLine = green + "| " + white + suggestion + " " + green ; 
+            // System.out.println();  // Display the suggestions in white text inside the green box
+            for(int i=0;i<51-suggestion.length();i++){
+                String x = " ";
+                suggetionLine+=x;
+            }
+            suggetionLine+=reset + "|";
+            System.out.println(suggetionLine);
         }
 
         // Close the chart with green border
