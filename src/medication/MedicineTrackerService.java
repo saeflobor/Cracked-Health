@@ -110,6 +110,8 @@ public class MedicineTrackerService {
         } catch (IOException e) {
             System.out.println("Error reading from CSV file: " + e.getMessage());
         }
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     // Display daily consumption summary
@@ -144,6 +146,8 @@ public class MedicineTrackerService {
         } catch (IOException e) {
             System.out.println("Error reading from CSV file: " + e.getMessage());
         }
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     // Save medication details to CSV file

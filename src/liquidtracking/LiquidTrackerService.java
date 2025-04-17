@@ -101,5 +101,7 @@ public class LiquidTrackerService {
 
         System.out.println(String.format("| %-26d| %-19d |", totalWaterConsumed, dailyWaterGoal - totalWaterConsumed));
         System.out.println("+----------------------------+---------------------+");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 }
