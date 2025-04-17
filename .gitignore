@@ -29,3 +29,7 @@ bin/
 .DS_Store
 
 .idea
+
+health_records.csv
+liquid_consumption.csv
+medication_records.csv
