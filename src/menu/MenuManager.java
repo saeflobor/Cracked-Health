@@ -55,7 +55,10 @@ public class MenuManager {
                     routineService.displayIdealRoutine();
                     break;
                 case 5:
-                    new MedAndLiquidMenu(scanner, medicineTracker, liquidTracker).displayMedAndLiquidMenu();
+                    new MedicineMenu(scanner, medicineTracker).displayMedicineMenu();  // Medicine menu
+                    break;
+                case 6:
+                    new LiquidMenu(scanner, liquidTracker).displayLiquidMenu();  // Liquid menu
                     break;
                 case 0:
                     running = false;
@@ -147,8 +150,8 @@ public class MenuManager {
         System.out.println(blueColor + "2. Suggestions to Revive" + resetColor);
         System.out.println(blueColor + "3. Doctor Recommendation" + resetColor);
         System.out.println(blueColor + "4. Ideal Routine" + resetColor);
-        System.out.println(blueColor + "5. Med and Liquid Tracker" + resetColor);
+        System.out.println(blueColor + "5. Medicine Tracker" + resetColor);
+        System.out.println(blueColor + "6. Liquid Tracker" + resetColor);
         System.out.println(blueColor + "0. Exit" + resetColor);
     }
-
 }
