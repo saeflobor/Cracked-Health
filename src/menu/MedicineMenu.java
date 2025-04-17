@@ -17,9 +17,13 @@ public class MedicineMenu {
     }
 
     public void displayMedicineMenu() {
+        TerminalUtils terminalUtils = new TerminalUtils();
+        // terminalUtils.clearScreen();
+        // terminalUtils.showApplicationName();
         boolean submenuRunning = true;
         while (submenuRunning) {
-            TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
+            terminalUtils.clearScreen();  // Clear the terminal before showing the submenu
+            terminalUtils.showApplicationName();
             System.out.println("\nMedicine Tracker Menu:");
             System.out.println("1. Set Medication Details");
             System.out.println("2. Update Medication Doses");

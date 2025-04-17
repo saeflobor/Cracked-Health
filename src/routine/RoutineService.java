@@ -1,9 +1,16 @@
 package routine;
 
+import java.util.Scanner;
+
+import utils.TerminalUtils;
+
 public class RoutineService {
 
 
     public void displayIdealRoutine() {
+        TerminalUtils terminalUtils = new TerminalUtils();
+        terminalUtils.clearScreen();
+        terminalUtils.showApplicationName();
         String yellow = "\033[33m";  // Yellow color code for borders and text
         String white = "\033[37m";   // White color code for text inside the chart
         String reset = "\033[0m";    // Reset color code to default
@@ -23,5 +30,7 @@ public class RoutineService {
 
 
         System.out.println(yellow + "+----------------------------------------------+" + reset);
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 }

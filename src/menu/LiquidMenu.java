@@ -19,6 +19,7 @@ public class LiquidMenu {
         boolean submenuRunning = true;
         while (submenuRunning) {
             TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
+            TerminalUtils.showApplicationName();
             System.out.println("\nLiquid Tracker Menu:");
             System.out.println("1. Set Daily Water Goal");
             System.out.println("2. Track Water Consumption");

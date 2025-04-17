@@ -2,14 +2,21 @@ package doctor;
 
 import java.util.Scanner;
 
+import utils.TerminalUtils;
+
 public class DoctorRecommendationService {
 
     public void recommendDoctor(Scanner scanner) {
 
         displayDoctorChart();
+        Scanner scanner2 = new Scanner(System.in);
+        scanner2.nextLine();
     }
 
     private void displayDoctorChart() {
+        TerminalUtils terminalUtils = new TerminalUtils();
+        terminalUtils.clearScreen();
+        terminalUtils.showApplicationName();
         String green = "\033[32m";  // Green color code for borders
         String white = "\033[37m";  // White color code for text
         String reset = "\033[0m";   // Reset color to default

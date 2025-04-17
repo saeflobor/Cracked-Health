@@ -43,21 +43,33 @@ public class MenuManager {
 
             switch (choice) {
                 case 1:
+                // TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+                    // showApplicationName();
                     new HealthStatusMenu(scanner, healthChecker).displayHealthStatusMenu();
                     break;
                 case 2:
+                    // TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+                    // showApplicationName();
                     handleSuggestions();
                     break;
                 case 3:
+                // TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+                    // showApplicationName();
                     doctorRecommendationService.recommendDoctor(scanner);
                     break;
                 case 4:
+                // TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+                    // showApplicationName();
                     routineService.displayIdealRoutine();
                     break;
                 case 5:
+                // TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+                    // showApplicationName();
                     new MedicineMenu(scanner, medicineTracker).displayMedicineMenu();  // Medicine menu
                     break;
                 case 6:
+                // TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
+                    // showApplicationName();
                     new LiquidMenu(scanner, liquidTracker).displayLiquidMenu();  // Liquid menu
                     break;
                 case 0:
@@ -82,6 +94,8 @@ public class MenuManager {
         String status = getHealthStatus(statusChoice);
         String suggestions = suggestionService.generateSuggestions(status);
         displaySuggestionsChart(suggestions);
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     private String getHealthStatus(int choice) {

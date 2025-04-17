@@ -16,9 +16,12 @@ public class HealthStatusMenu {
     }
 
     public void displayHealthStatusMenu() {
+        TerminalUtils terminalUtils = new TerminalUtils();
+        terminalUtils.clearScreen();
+        terminalUtils.showApplicationName();
         boolean submenuRunning = true;
         while (submenuRunning) {
-            TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
+            // TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
             System.out.println("\nHealth Condition Checker Menu:");
             System.out.println("1. Check Health Condition");
             System.out.println("2. View Daily Health Track");
