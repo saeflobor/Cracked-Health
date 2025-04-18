@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class DailyHealthTracker {
@@ -46,24 +47,31 @@ public class DailyHealthTracker {
             String line;
             boolean hasRecords = false;
 
-            System.out.println("\nYour Daily Health Track:");
-            System.out.println("+---------------------------+");
+            System.out.println("\n\033[31m<<<\033[0m Your Daily Health Track \033[31m>>>\033[32m");
+            System.out.println("+---------------------------+-------------------------+");
             System.out.println("| Date and Time             | Health Status           |");
-            System.out.println("+---------------------------+");
+            System.out.println("+---------------------------+-------------------------+");
 
             // Read through the file and print each line
             while ((line = br.readLine()) != null) {
                 hasRecords = true;
-                System.out.println("| " + line + " |");
+                System.out.println("| \033[00m" + line + "      \033[32m|");
+                
             }
 
             if (!hasRecords) {
-                System.out.println("| No health records available. |");
+                System.out.println("|                No health records available           |");
+                Scanner scanner = new Scanner(System.in);
+                scanner.nextLine();
             }
 
-            System.out.println("+---------------------------+");
+            System.out.println("+---------------------------+-------------------------+");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
         } catch (IOException e) {
             System.out.println("Error reading from CSV file: " + e.getMessage());
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
         }
     }
 }
