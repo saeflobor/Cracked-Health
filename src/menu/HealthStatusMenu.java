@@ -5,6 +5,8 @@ import utils.TerminalUtils;
 
 import java.util.Scanner;
 
+import static java.awt.Color.green;
+
 public class HealthStatusMenu {
 
     private Scanner scanner;
@@ -21,13 +23,13 @@ public class HealthStatusMenu {
         terminalUtils.showApplicationName();
         boolean submenuRunning = true;
         while (submenuRunning) {
-            // TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
-            System.out.println("\nHealth Condition Checker Menu:");
-            System.out.println("1. Check Health Condition");
-            System.out.println("2. View Daily Health Track");
-            System.out.println("0. Back to Main Menu");
+            TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
+            System.out.println("\033[31m\n<<<\033[32m Health Condition Checker Menu \033[31m>>>\n\033[0m");
+            System.out.println("\033[31m1.\033[0m Check Health Condition");
+            System.out.println("\033[31m2.\033[0m View Daily Health Track");
+            System.out.println("\033[31m0.\033[0m Back to Main Menu");
 
-            System.out.print("Please choose an option: ");
+            System.out.print("\nPlease choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline character
 

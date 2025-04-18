@@ -38,6 +38,7 @@ public class MenuManager {
             TerminalUtils.clearScreen();  // Clear the terminal before showing the menu
             showApplicationName();
             showWelcomeMessage();
+            System.out.print("\nPlease select an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline character
 
@@ -82,18 +83,19 @@ public class MenuManager {
     }
 
     private void handleSuggestions() {
-        System.out.println("\nSelect your health status from the following options:");
-        System.out.println("1. Bad Health");
-        System.out.println("2. Worst Health");
-        System.out.println("3. Close to Death");
-        System.out.println("4. Okay Health");
-        System.out.print("Please choose an option: ");
+        System.out.println("\n\033[31m<<<\033[32m Select your health status from the following options \033[31m>>>\n\033[0m");
+        System.out.println("\033[31m1.\033[00m Bad Health");
+        System.out.println("\033[31m2.\033[00m Worst Health");
+        System.out.println("\033[31m3.\033[00m Close to Death");
+        System.out.println("\033[31m4.\033[00m Okay Health");
+        System.out.print("\nPlease choose an option: ");
         int statusChoice = scanner.nextInt();
         scanner.nextLine();  // Consume the newline character
 
         String status = getHealthStatus(statusChoice);
         String suggestions = suggestionService.generateSuggestions(status);
         displaySuggestionsChart(suggestions);
+        System.out.println("Press any key to continue...");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
@@ -114,15 +116,15 @@ public class MenuManager {
     }
 
     private void displaySuggestionsChart(String suggestions) {
-        System.out.println("\nSuggestions to Revive:");
+        System.out.println("\033[32m\nSuggestions to Revive:\033[00m");
         System.out.println("+--------------------------------------------------+");
-        System.out.println("|                   Suggestions                   |");
+        System.out.println("|                   Suggestions                    |");
         System.out.println("+--------------------------------------------------+");
         String[] suggestionList = suggestions.split("\n");
         for (String suggestion : suggestionList) {
-            System.out.println("| " + suggestion + " |");
+            System.out.println("\033[32m| " + suggestion);
         }
-        System.out.println("+--------------------------------------------------+");
+        System.out.println("\033[00m+--------------------------------------------------+");
     }
 
     private static void showApplicationName() {
@@ -134,7 +136,7 @@ public class MenuManager {
         String[] asciiArt = {
                 "---------------------------------------",
                 "|                                     |",
-                "|      " + redColor + "C R A C K E D" + resetColor + " - " + greenColor + "H E A L T H" + resetColor + "    |",
+                "|      " + redColor + "C R A C K E D " + greenColor + "- H E A L T H" + "    |",
                 "|                                     |",
                 "---------------------------------------"
         };
@@ -147,7 +149,7 @@ public class MenuManager {
         }
 
         String message = "Proceed only if you are in a bad health!!";
-        System.out.println(redColor + "| " + message + " " + resetColor);
+        System.out.println(redColor + "| " + message + " |" + resetColor);
     }
 
     // Show the "Welcome to Cracked-Health!" message in green and options in blue
@@ -157,15 +159,15 @@ public class MenuManager {
         String resetColor = "\033[0m";   // Reset color ANSI code
 
         // Display welcome message in green
-        System.out.println(greenColor + "Welcome to Cracked-Health!" + resetColor);
+        System.out.println(greenColor + "\n\033[31m<<<\033[32m Welcome to Cracked-Health! \033[31m>>>\n" + resetColor);
 
         // Display options with numbering in blue
-        System.out.println(blueColor + "1. Health Condition Checker" + resetColor);
-        System.out.println(blueColor + "2. Suggestions to Revive" + resetColor);
-        System.out.println(blueColor + "3. Doctor Recommendation" + resetColor);
-        System.out.println(blueColor + "4. Ideal Routine" + resetColor);
-        System.out.println(blueColor + "5. Medicine Tracker" + resetColor);
-        System.out.println(blueColor + "6. Liquid Tracker" + resetColor);
-        System.out.println(blueColor + "0. Exit" + resetColor);
+        System.out.println("\033[31m1.\033[0m Health Condition Checker");
+        System.out.println("\033[31m2.\033[0m Suggestions to Revive");
+        System.out.println("\033[31m3.\033[0m Doctor Recommendation");
+        System.out.println("\033[31m4.\033[0m Ideal Routine");
+        System.out.println("\033[31m5.\033[0m Medicine Tracker");
+        System.out.println("\033[31m6.\033[0m Liquid Tracker");
+        System.out.println("\033[31m0.\033[0m Exit");
     }
 }

@@ -83,9 +83,9 @@ public class MedicineTrackerService {
             String line;
             boolean hasRecords = false;
 
-            System.out.println("\nMedication Tracker:");
+            System.out.println("\n\033[31m<<<\033[32m Medication Tracker \033[31m>>>\033[32m");
             System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
-            System.out.println("| Medication                | Morning Doses   | Noon Doses      | Night Doses     |");
+            System.out.println("|        Medication          |  Morning Doses  |   Noon Doses    |   Night Doses   |");
             System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
 
             // Read the file and display the medication tracker
@@ -98,15 +98,15 @@ public class MedicineTrackerService {
                     int noon = Integer.parseInt(record[2]);
                     int night = Integer.parseInt(record[3]);
 
-                    System.out.println(String.format("| %-26s| %-16d| %-16d| %-16d|", medication, morning, noon, night));
+                    System.out.println(String.format("\033[0m| %-27s| %-16d| %-16d| %-16d|", medication, morning, noon, night));
                 }
             }
 
             if (!hasRecords) {
-                System.out.println("| No medication records available. |");
+                System.out.println("|                       No medication records available.                           |");
             }
 
-            System.out.println("+----------------------------+-----------------+-----------------+-----------------+");
+            System.out.println("\033[32m+----------------------------+-----------------+-----------------+-----------------+");
         } catch (IOException e) {
             System.out.println("Error reading from CSV file: " + e.getMessage());
         }

@@ -24,15 +24,15 @@ public class MedicineMenu {
         while (submenuRunning) {
             terminalUtils.clearScreen();  // Clear the terminal before showing the submenu
             terminalUtils.showApplicationName();
-            System.out.println("\nMedicine Tracker Menu:");
-            System.out.println("1. Set Medication Details");
-            System.out.println("2. Update Medication Doses");
-            System.out.println("3. View Medication Tracker");
-            System.out.println("4. Track Daily Medicine Consumption");
-            System.out.println("5. View Daily Medicine Consumption Summary");
-            System.out.println("0. Back to Main Menu");
+            System.out.println("\n\033[31m<<<\033[32m Medicine Tracker Menu \033[31m>>>\n");
+            System.out.println("\033[31m1.\033[00m Set Medication Details");
+            System.out.println("\033[31m2.\033[00m Update Medication Doses");
+            System.out.println("\033[31m3.\033[00m View Medication Tracker");
+            System.out.println("\033[31m4.\033[00m Track Daily Medicine Consumption");
+            System.out.println("\033[31m5.\033[00m View Daily Medicine Consumption Summary");
+            System.out.println("\033[31m0.\033[00m Back to Main Menu");
 
-            System.out.print("Please choose an option: ");
+            System.out.print("\nPlease choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline character
 

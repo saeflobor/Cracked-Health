@@ -20,13 +20,13 @@ public class LiquidMenu {
         while (submenuRunning) {
             TerminalUtils.clearScreen();  // Clear the terminal before showing the submenu
             TerminalUtils.showApplicationName();
-            System.out.println("\nLiquid Tracker Menu:");
-            System.out.println("1. Set Daily Water Goal");
-            System.out.println("2. Track Water Consumption");
-            System.out.println("3. View Water Consumption Status");
-            System.out.println("0. Back to Main Menu");
+            System.out.println("\n\033[31m<<<\033[32m Liquid Tracker Menu \033[31m>>>\033[32m\n");
+            System.out.println("\033[31m1.\033[0m Set Daily Water Goal");
+            System.out.println("\033[31m2.\033[0m Track Water Consumption");
+            System.out.println("\033[31m3.\033[0m View Water Consumption Status");
+            System.out.println("\033[31m0.\033[0m Back to Main Menu");
 
-            System.out.print("Please choose an option: ");
+            System.out.print("\nPlease choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline character
 

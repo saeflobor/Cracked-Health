@@ -94,13 +94,13 @@ public class LiquidTrackerService {
 
     // Display water consumption status
     public void displayWaterConsumptionStatus() {
-        System.out.println("\nWater Consumption Status for " + currentDate + ":");
+        System.out.println("\n\033[31m<<<\033[32m Water Consumption Status for " + currentDate + " \033[31m>>>\033[32m");
         System.out.println("+----------------------------+---------------------+");
         System.out.println("| Water Consumed (in ml)     | Remaining Goal (ml) |");
         System.out.println("+----------------------------+---------------------+");
 
-        System.out.println(String.format("| %-26d| %-19d |", totalWaterConsumed, dailyWaterGoal - totalWaterConsumed));
-        System.out.println("+----------------------------+---------------------+");
+        System.out.println(String.format("|\033[0m %-27d| %-19d |", totalWaterConsumed, dailyWaterGoal - totalWaterConsumed));
+        System.out.println("\033[32m+----------------------------+---------------------+");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }

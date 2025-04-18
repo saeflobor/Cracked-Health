@@ -19,7 +19,7 @@ public class TerminalUtils {
         String[] asciiArt = {
                 "---------------------------------------",
                 "|                                     |",
-                "|      " + redColor + "C R A C K E D" + resetColor + " - " + greenColor + "H E A L T H" + resetColor + "    |",
+                "|      " + redColor + "C R A C K E D" + greenColor + " - H E A L T H" + "    |",
                 "|                                     |",
                 "---------------------------------------"
         };
@@ -32,6 +32,6 @@ public class TerminalUtils {
         }
 
         String message = "Proceed only if you are in a bad health!!";
-        System.out.println(redColor + "| " + message + " " + resetColor);
+        System.out.println(redColor + "| " + message + " |" + resetColor);
     }
 }

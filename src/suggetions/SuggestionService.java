@@ -5,18 +5,18 @@ public class SuggestionService {
     public String generateSuggestions(String healthStatus) {
         switch (healthStatus) {
             case "You are close to DEATH!!!":
-                return  "1. Consult a doctor immediately.\n" +
-                        "2. Need proper meals (3 times).\n" +
-                        "3. Drink enough liquid.          ";
+                return  "1. Consult a doctor immediately.                 |\n" +
+                        "2. Need proper meals (3 times).                  |\n" +
+                        "3. Drink enough liquid.                          |";
             case "You are in worst health!!":
-                return  "1. You should get at least 6 hours of sleep.\n" +
-                        "2. Need proper meals (3 times).             \n" +
-                        "3. Consult a doctor.                          ";
+                return  "1. You should get at least 6 hours of sleep.     |\n" +
+                        "2. Need proper meals (3 times).                  |\n" +
+                        "3. Consult a doctor.                             |";
             case "You are in bad health!":
-                return  "1. Get at least 6 hours of sleep.\n" +
-                        "2. Try to consume 3 meals.";
+                return  "1. Get at least 6 hours of sleep.                |\n" +
+                        "2. Try to consume 3 meals.                       |";
             default:
-                return "You seem to be in okay health. Continue your normal routine.";
+                return  "You seem okay. Continue your normal routine.     |";
         }
     }
 
